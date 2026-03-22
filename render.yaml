@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: trektribe-waitlist-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: COUCHBASE_URI
+        sync: false
+      - key: COUCHBASE_USERNAME
+        sync: false
+      - key: COUCHBASE_PASSWORD
+        sync: false
+      - key: COUCHBASE_BUCKET
+        sync: false
+      - key: ALLOWED_ORIGINS
+        sync: false
