@@ -10,20 +10,21 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// CORS — only allow specific origins
-const allowedOrigins = [
-    'http://localhost:3000',
-    'http://localhost:3001',
-    ...(process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim()) : [])
-];
+// CORS — fully env-driven, no hardcoded origins
+const isProd = process.env.NODE_ENV === 'production';
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || '')
+    .split(',')
+    .map(o => o.trim())
+    .filter(Boolean);
 
 app.use(cors({
     origin: (origin, callback) => {
-        // Allow requests with no origin (mobile apps, curl, Postman)
+        // Allow requests with no origin (curl, Postman, server-to-server)
         if (!origin) return callback(null, true);
-        if (allowedOrigins.includes(origin)) {
-            return callback(null, true);
-        }
+        // In development: allow all origins
+        if (!isProd) return callback(null, true);
+        // In production: only allow origins listed in ALLOWED_ORIGINS
+        if (allowedOrigins.includes(origin)) return callback(null, true);
         callback(new Error(`CORS: Origin '${origin}' not allowed`));
     },
     credentials: true,
