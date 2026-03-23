@@ -90,6 +90,21 @@ class WaitlistUser {
     return null;
   }
 
+  static async countDocuments(query = {}) {
+    try {
+      const cluster = getCluster();
+      let q = 'SELECT COUNT(*) as count FROM `trektribe`.`_default`.`waitlist_users`';
+      if (query.role) {
+        q += ` WHERE role = '${query.role}'`;
+      }
+      const result = await cluster.query(q);
+      return result.rows[0].count;
+    } catch (err) {
+      console.error('countDocuments error:', err);
+      return 0; // Fallback to 0 if count fails (e.g. index not found initially)
+    }
+  }
+
   static find() {
     return new WaitlistQueryBuilder();
   }

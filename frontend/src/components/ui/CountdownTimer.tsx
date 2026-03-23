@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const LAUNCH_DATE = new Date('2026-05-15T00:00:00').getTime();
+const LAUNCH_DATE = new Date('2026-04-16T00:00:00').getTime();
 
 export default function CountdownTimer() {
   const [mounted, setMounted] = useState(false);
