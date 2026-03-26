@@ -56,6 +56,27 @@ export default function WaitlistForm() {
     window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
   };
 
+  const shareOnInstagram = async () => {
+    const text = `Join TrekTribe — the premium social travel platform for India! Use my referral code ${user.referralCode} when signing up on the waitlist to get priority access 🏔️`;
+    
+    // Use Web Share API if available (works well on mobile for Native Instagram share)
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'TrekTribe Waitlist',
+          text: text,
+        });
+      } catch (err) {
+        console.log('Error sharing:', err);
+      }
+    } else {
+      // Fallback for desktop: copy to clipboard and open Instagram
+      navigator.clipboard.writeText(text);
+      alert('Referral text copied to clipboard! Paste it in your Instagram Story or DMs.');
+      window.open('https://instagram.com', '_blank');
+    }
+  };
+
   if (user) {
     return (
       <div id="waitlist-dashboard" className="max-w-4xl mx-auto px-6 py-12">
@@ -105,7 +126,7 @@ export default function WaitlistForm() {
                 <Button onClick={shareOnWhatsApp} className="flex-1 bg-green-600 hover:bg-green-700 text-white rounded-2xl py-4 font-bold h-auto">
                   <Share2 className="mr-2" size={20} /> WhatsApp
                 </Button>
-                <Button variant="outline" className="flex-1 border-2 border-slate-100 rounded-2xl py-4 font-bold h-auto">
+                <Button onClick={shareOnInstagram} variant="outline" className="flex-1 border-2 border-slate-100 rounded-2xl py-4 font-bold h-auto">
                    <Instagram className="mr-2" size={20} /> Instagram
                 </Button>
               </div>
@@ -184,11 +205,13 @@ export default function WaitlistForm() {
               </div>
               <input
                 required
-                type="text"
+                type="tel"
+                pattern="[6-9][0-9]{9}"
+                title="Please enter a valid 10-digit Indian mobile number"
                 placeholder="Phone Number"
                 className="w-full bg-white border-2 border-slate-100 rounded-2xl px-14 py-4 text-gray-900 focus:outline-none focus:ring-4 focus:ring-green-500/10 focus:border-green-500 transition-all font-medium"
                 value={formData.phoneNumber}
-                onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
+                onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value.replace(/\D/g, '').slice(0, 10) })}
               />
             </div>
 

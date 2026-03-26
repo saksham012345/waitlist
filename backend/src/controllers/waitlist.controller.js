@@ -4,10 +4,21 @@ export const joinWaitlist = async (req, res) => {
   try {
     const { name, email, phoneNumber, city, role, ref } = req.body;
 
+    const phoneRegex = /^[6-9]\d{9}$/;
+    if (!phoneRegex.test(phoneNumber)) {
+      return res.status(400).json({ message: 'Please enter a valid 10-digit Indian phone number' });
+    }
+
     // Prevent duplicate email
     let user = await WaitlistUser.findOne({ email });
     if (user) {
       return res.status(400).json({ message: 'Email already on waitlist' });
+    }
+
+    // Prevent duplicate phone number
+    let phoneUser = await WaitlistUser.findOne({ phoneNumber });
+    if (phoneUser) {
+      return res.status(400).json({ message: 'Phone number already registered' });
     }
 
     // Create new user

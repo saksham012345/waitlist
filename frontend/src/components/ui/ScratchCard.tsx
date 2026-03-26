@@ -101,10 +101,10 @@ export default function ScratchCard({ onComplete, isUnlocked, seed }: ScratchCar
     const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
     let transparentPx = 0;
     for (let i = 3; i < pixels.length; i += 4) {
-      if (pixels[i] === 0) transparentPx++;
+      if (pixels[i] < 50) transparentPx++;
     }
     const percent = (transparentPx / (pixels.length / 4)) * 100;
-    if (percent > 40) {
+    if (percent > 30) {
       setIsScratched(true);
       onComplete(reward);
     }
@@ -141,7 +141,7 @@ export default function ScratchCard({ onComplete, isUnlocked, seed }: ScratchCar
         onMouseUp={() => setIsDrawing(false)}
         onMouseLeave={() => setIsDrawing(false)}
         onMouseMove={scratch}
-        onTouchStart={(e) => { e.preventDefault(); setIsDrawing(true); }}
+        onTouchStart={() => setIsDrawing(true)}
         onTouchEnd={() => setIsDrawing(false)}
         onTouchMove={scratch}
         animate={isScratched ? { opacity: 0, pointerEvents: 'none' } : { opacity: 1 }}

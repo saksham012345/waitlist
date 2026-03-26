@@ -71,6 +71,9 @@ class WaitlistUser {
     } else if (query.referralCode) {
       queryString += 'referralCode = $referralCode';
       params.referralCode = query.referralCode;
+    } else if (query.phoneNumber) {
+      queryString += 'phoneNumber = $phoneNumber';
+      params.phoneNumber = query.phoneNumber;
     } else {
       return null;
     }
@@ -80,7 +83,8 @@ class WaitlistUser {
       try {
           const result = await cluster.query(queryString, { parameters: params });
           if (result.rows.length > 0) {
-            return new WaitlistUser(result.rows[0]);
+            const row = result.rows[0];
+            return new WaitlistUser(row.waitlist_users || row);
           }
       } catch(err) {
           console.error(err);

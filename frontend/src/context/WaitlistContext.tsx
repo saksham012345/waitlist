@@ -83,10 +83,20 @@ export const WaitlistProvider = ({ children }: { children: React.ReactNode }) =>
 
     const fetchData = async () => {
       try {
-        const [countRes, recentRes] = await Promise.all([
+        const promises: Promise<any>[] = [
           axios.get(`${API_URL}/count`),
           axios.get(`${API_URL}/recent`)
-        ]);
+        ];
+        
+        // Polling user profile if logged in
+        if (user?.email) {
+          promises.push(axios.get(`${API_URL}/profile/${encodeURIComponent(user.email)}`));
+        }
+
+        const results = await Promise.all(promises);
+        const countRes = results[0];
+        const recentRes = results[1];
+        const profileRes = user?.email ? results[2] : null;
 
         if (countRes.data) {
           setExplorerCount(120 + countRes.data.count);
@@ -101,17 +111,14 @@ export const WaitlistProvider = ({ children }: { children: React.ReactNode }) =>
           const recentItems: any[] = recentRes.data;
           
           if (!initialFetchComplete) {
-            // First time loading, just register the IDs as seen so we don't spam 5 ancient popups.
             recentItems.forEach(item => seenActivityIds.current.add(String(item.id || item._id)));
             initialFetchComplete = true;
           } else {
-            // Check for new activities
             const newActivities = recentItems.filter(item => !seenActivityIds.current.has(String(item.id || item._id)));
             if (newActivities.length > 0) {
               setActivity(prev => [...prev, ...newActivities]);
               newActivities.forEach(item => seenActivityIds.current.add(String(item.id || item._id)));
 
-              // Auto dismiss new activities after 3 seconds
               newActivities.forEach(item => {
                 setTimeout(() => {
                   setActivity(prev => prev.filter(a => a.id !== item.id && a._id !== item._id));
@@ -119,6 +126,19 @@ export const WaitlistProvider = ({ children }: { children: React.ReactNode }) =>
               });
             }
           }
+        }
+
+        if (profileRes && profileRes.data) {
+          setUser((prevUser: any) => {
+            if (!prevUser) return profileRes.data;
+            if (prevUser.referralCount !== profileRes.data.referralCount || 
+                prevUser.waitlistPosition !== profileRes.data.waitlistPosition) {
+              const updatedUser = { ...prevUser, ...profileRes.data };
+              localStorage.setItem('trektribe_user', JSON.stringify(updatedUser));
+              return updatedUser;
+            }
+            return prevUser;
+          });
         }
       } catch (err) {
         console.warn('Could not fetch real-time community stats', err);
@@ -129,7 +149,7 @@ export const WaitlistProvider = ({ children }: { children: React.ReactNode }) =>
     const pollInterval = setInterval(fetchData, 15000); // Poll every 15s
 
     return () => clearInterval(pollInterval);
-  }, []);
+  }, [user?.email]);
 
   return (
     <WaitlistContext.Provider value={{ 

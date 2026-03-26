@@ -19,6 +19,15 @@ export const connectDB = async () => {
     });
     console.log('Connected to Couchbase Cluster');
     bucket = cluster.bucket(bucketName);
+    
+    // Create primary index to allow sorting and find() without specific keys
+    try {
+      await cluster.query(`CREATE PRIMARY INDEX ON \`${bucketName}\`.\`_default\`.\`waitlist_users\` IF NOT EXISTS`);
+      console.log('Primary index ensured on waitlist_users');
+    } catch (err) {
+      console.warn('Could not create primary index:', err.message);
+    }
+
     return { cluster, bucket };
   } catch (error) {
     console.error('Couchbase connection error:', error);
