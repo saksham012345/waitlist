@@ -52,12 +52,14 @@ export default function WaitlistForm() {
   };
 
   const shareOnWhatsApp = () => {
-    const text = `Join TrekTribe — the premium social travel platform for India! Use my referral code *${user.referralCode}* when signing up on the waitlist to get priority access 🏔️`;
+    const shareUrl = `${window.location.origin}?ref=${user.referralCode}`;
+    const text = `Join TrekTribe — the premium social travel platform for India! Use my referral code *${user.referralCode}* or click the link to join the waitlist and get priority access 🏔️\n\n${shareUrl}`;
     window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
   };
 
   const shareOnInstagram = async () => {
-    const text = `Join TrekTribe — the premium social travel platform for India! Use my referral code ${user.referralCode} when signing up on the waitlist to get priority access 🏔️`;
+    const shareUrl = `${window.location.origin}?ref=${user.referralCode}`;
+    const text = `Join TrekTribe — the premium social travel platform for India! Use my referral code ${user.referralCode} or click the link to join the waitlist and get priority access 🏔️\n\n${shareUrl}`;
     
     // Use Web Share API if available (works well on mobile for Native Instagram share)
     if (navigator.share) {
