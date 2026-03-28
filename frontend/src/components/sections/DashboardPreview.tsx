@@ -122,7 +122,7 @@ export default function DashboardPreview() {
                   Founding organizers get the first 2 months completely free — no card required.
                 </p>
                 <button
-                  onClick={() => document.getElementById('waitlist-form')?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick={() => document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' })}
                   className="w-full mt-2 flex items-center justify-center gap-2 bg-white text-green-700 font-black py-3.5 rounded-2xl hover:bg-green-50 transition-colors"
                 >
                   Secure Your Organizer Spot <ArrowRight size={16} />

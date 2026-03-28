@@ -57,7 +57,7 @@ const Giveaway = () => {
               <p className="mt-2 font-medium opacity-90 text-sm">Start earning rewards by inviting friends when you join the waitlist today.</p>
             </div>
             <button 
-              onClick={() => document.getElementById('waitlist-form')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' })}
               className="w-full py-4 bg-white text-primary-eco font-bold rounded-xl hover:bg-slate-50 transition-colors"
             >
               Join the Waitlist
@@ -85,7 +85,7 @@ const Giveaway = () => {
           <div className="flex justify-between items-center mb-8">
             <h4 className="text-xl font-black text-slate-900">Top Explorers</h4>
             <div 
-              onClick={() => document.getElementById('waitlist-dashboard')?.scrollIntoView({ behavior: 'smooth' }) || window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}
+              onClick={() => document.getElementById('leaderboard')?.scrollIntoView({ behavior: 'smooth' }) || window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}
               className="text-primary-eco font-bold text-sm cursor-pointer hover:underline"
             >
               View Full Leaderboard

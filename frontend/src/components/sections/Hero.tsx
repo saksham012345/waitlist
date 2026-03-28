@@ -60,7 +60,7 @@ export default function Hero() {
   const [showToast, setShowToast] = useState(false);
 
   const scrollToWaitlist = () => {
-    document.getElementById('waitlist-form')?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleExploreTrips = () => {

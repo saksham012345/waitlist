@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "TrekTribe | Sustainable Travel & Community",
   description: "Social travel platform and CRM for eco-friendly organizers. Join the tribe and explore the world sustainably.",
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 import Providers from "./Providers";

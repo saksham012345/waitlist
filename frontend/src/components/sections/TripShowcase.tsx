@@ -103,7 +103,7 @@ export default function TripShowcase() {
               ))}
             </div>
             <button
-              onClick={() => document.getElementById('waitlist-form')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' })}
               className="mt-4 inline-flex items-center gap-2 bg-white text-green-700 font-black px-8 py-4 rounded-2xl hover:bg-green-50 transition-colors shadow-lg"
             >
               Get Early Access <ArrowRight size={18} />
