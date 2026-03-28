@@ -64,7 +64,7 @@ export default function Leaderboard() {
 
       <div className="mt-12 p-6 bg-slate-50 rounded-3xl border border-slate-100 text-center">
         <p className="text-sm font-medium text-gray-500">
-          The <span className="text-green-600 font-bold">top 2 explorers</span> with 99+ referrals will win a sponsored Himalayan Trek in May!
+          The <span className="text-green-600 font-bold">top 2 explorers</span> will win a sponsored Himalayan Trek in May!
         </p>
       </div>
     </div>

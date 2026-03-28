@@ -35,7 +35,7 @@ export default function DashboardPreview() {
   const { stats } = useWaitlist();
 
   return (
-    <section className="py-24 relative overflow-hidden bg-[#F8FAF9]">
+    <section id="dashboard" className="py-24 relative overflow-hidden bg-[#F8FAF9]">
       <FloatingElements />
 
       <div className="container mx-auto px-6 relative z-10">

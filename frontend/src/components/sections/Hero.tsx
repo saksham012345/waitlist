@@ -1,7 +1,7 @@
 'use client';
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Shield, Leaf, Globe, Mountain, Compass } from 'lucide-react';
 import HeroGlobe from './HeroGlobe';
 
@@ -57,9 +57,15 @@ import { useWaitlist } from '@/context/WaitlistContext';
 
 export default function Hero() {
   const { explorerCount } = useWaitlist();
+  const [showToast, setShowToast] = useState(false);
 
   const scrollToWaitlist = () => {
     document.getElementById('waitlist-form')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleExploreTrips = () => {
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 4000);
   };
 
   return (
@@ -134,6 +140,7 @@ export default function Hero() {
             <motion.button 
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
+              onClick={handleExploreTrips}
               className="w-full sm:w-auto px-10 py-5 bg-white text-gray-800 border-2 border-gray-100 hover:border-green-600 rounded-2xl font-bold text-lg transition-all"
             >
               Explore Trips
@@ -155,6 +162,29 @@ export default function Hero() {
           </div>
         </div>
       </div>
+
+      {/* Toast overlay */}
+      <AnimatePresence>
+        {showToast && (
+          <motion.div
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.9 }}
+              className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50 glass px-6 py-4 rounded-2xl shadow-2xl border-white/60 flex items-center gap-4 max-w-md w-max"
+          >
+              <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 shrink-0">
+                  <Compass size={20} />
+              </div>
+              <div>
+                  <h4 className="font-bold text-gray-900 text-sm text-left">Coming Soon!</h4>
+                  <p className="text-xs text-gray-600 font-medium text-left leading-relaxed">
+                    Currently we do not have any trips available.<br/> 
+                    Exploring trips will be available from day 1 of launch!
+                  </p>
+              </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Decorative icons floating with parallax effect */}
       <div className="hidden lg:block">

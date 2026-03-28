@@ -1,9 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import WorldMap from '../ui/WorldMap';
 import { Globe, Heart, Zap } from 'lucide-react';
+import { useWaitlist } from '@/context/WaitlistContext';
 
 const ImpactStat = ({ icon: Icon, value, label, delay }: any) => (
   <motion.div
@@ -20,13 +21,17 @@ const ImpactStat = ({ icon: Icon, value, label, delay }: any) => (
   </motion.div>
 );
 
-import { useWaitlist } from '@/context/WaitlistContext';
-
 export default function Impact() {
   const { stats } = useWaitlist();
+  const [baseCount, setBaseCount] = useState(128);
+
+  useEffect(() => {
+    // Start from a baseline of 128 and add real stats
+    setBaseCount(128 + (stats.total || 0));
+  }, [stats.total]);
 
   return (
-    <section className="py-24 bg-[#F8FAF9] relative overflow-hidden">
+    <section id="rewards" className="py-24 bg-[#F8FAF9] relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center mb-20">
           <motion.h2 
@@ -48,7 +53,7 @@ export default function Impact() {
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-24">
               <ImpactStat icon={Globe} value="1" label="Country" delay={0.1} />
-              <ImpactStat icon={Heart} value={`${stats.total}+`} label="Community" delay={0.2} />
+              <ImpactStat icon={Heart} value={`${baseCount}+`} label="Community" delay={0.2} />
               <ImpactStat icon={Zap} value="100%" label="Sustainable" delay={0.3} />
             </div>
           </div>
