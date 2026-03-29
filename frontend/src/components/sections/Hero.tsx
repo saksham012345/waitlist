@@ -31,7 +31,7 @@ const CommunityAvatars = ({ explorerCount }: { explorerCount: number }) => (
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: 0.8 }}
-    className="flex items-center gap-4 mt-12 mb-8 bg-white/50 backdrop-blur-sm px-6 py-3 rounded-full border border-white inline-flex shadow-sm hover:shadow-md transition-shadow"
+    className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 mt-8 sm:mt-12 mb-8 bg-white/70 backdrop-blur-md px-4 sm:px-6 py-3 rounded-3xl sm:rounded-full border border-white inline-flex shadow-sm hover:shadow-md transition-shadow max-w-[95vw]"
   >
     <div className="flex -space-x-3">
       {[1, 2, 3, 4].map((i) => (
@@ -112,7 +112,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="text-6xl md:text-8xl font-black text-gray-900 leading-[0.9] tracking-tighter mb-8"
+            className="text-5xl sm:text-6xl md:text-8xl font-black text-gray-900 leading-[1.1] md:leading-[0.9] tracking-tighter mb-6 md:mb-8"
           >
             Find Your <span className="text-gradient">Tribe.</span><br />
             Travel Together.
@@ -128,7 +128,7 @@ export default function Hero() {
             The premium community for the modern eco-conscious traveler.
           </motion.p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full px-2 sm:px-0">
             <motion.button 
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
@@ -149,7 +149,7 @@ export default function Hero() {
 
           <CommunityAvatars explorerCount={explorerCount} />
 
-          <div className="mt-20 flex flex-wrap justify-center gap-8 md:gap-16 opacity-50 grayscale transition-all duration-500 hover:grayscale-0 hover:opacity-100">
+          <div className="mt-16 sm:mt-20 flex flex-wrap justify-center gap-4 sm:gap-8 md:gap-16 opacity-50 grayscale transition-all duration-500 hover:grayscale-0 hover:opacity-100 px-4">
             <div className="flex items-center gap-2 font-black text-2xl text-gray-400">
               <Shield className="text-green-600" /> VERIFIED
             </div>

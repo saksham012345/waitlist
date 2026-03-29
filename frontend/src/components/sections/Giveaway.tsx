@@ -93,17 +93,17 @@ const Giveaway = () => {
           </div>
           <div className="space-y-4">
             {leaderboard.slice(0, 3).map((user, i) => (
-              <div key={user._id || i} className="flex items-center justify-between p-4 rounded-2xl hover:bg-white/50 transition-colors">
-                <div className="flex items-center gap-4">
-                  <span className={`font-black text-lg ${i === 0 ? 'text-amber-500' : i === 1 ? 'text-slate-400' : 'text-amber-700'}`}>#{i + 1}</span>
-                  <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center font-bold text-green-700 border-2 border-white">
+              <div key={user._id || i} className="flex items-center justify-between p-4 rounded-2xl hover:bg-white/50 transition-colors w-full overflow-hidden">
+                <div className="flex items-center gap-2 sm:gap-4 flex-1 min-w-0 mr-2">
+                  <span className={`font-black text-lg shrink-0 ${i === 0 ? 'text-amber-500' : i === 1 ? 'text-slate-400' : 'text-amber-700'}`}>#{i + 1}</span>
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 shrink-0 rounded-full bg-green-100 flex items-center justify-center font-bold text-green-700 border-2 border-white text-sm sm:text-base">
                     {user.name?.charAt(0).toUpperCase() || 'U'}
                   </div>
-                  <span className="font-bold text-slate-800">{user.name}</span>
+                  <span className="font-bold text-slate-800 truncate">{user.name}</span>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1 sm:gap-2 shrink-0">
                   <span className="font-black text-slate-900">{user.referralCount}</span>
-                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Referrals</span>
+                  <span className="text-[9px] sm:text-[10px] font-bold text-gray-400 uppercase tracking-widest">Referrals</span>
                 </div>
               </div>
             ))}

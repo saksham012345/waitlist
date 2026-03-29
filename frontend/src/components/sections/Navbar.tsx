@@ -5,9 +5,9 @@ import { motion } from 'framer-motion';
 
 const Navbar = () => {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4">
+    <nav className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 py-3 sm:py-4">
       <div className="max-w-7xl mx-auto">
-        <div className="glass rounded-2xl px-6 py-3 flex justify-between items-center shadow-lg shadow-green-900/5 border border-white/40">
+        <div className="bg-white rounded-2xl px-4 sm:px-6 py-3 flex justify-between items-center shadow-md border border-slate-100">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}

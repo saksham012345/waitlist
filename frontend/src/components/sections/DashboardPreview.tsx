@@ -47,7 +47,7 @@ export default function DashboardPreview() {
           >
             <Shield size={16} /> For Trip Organizers
           </motion.div>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 leading-tight px-2">
             The Hub for <span className="text-gradient">Professional</span> Organizers
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
