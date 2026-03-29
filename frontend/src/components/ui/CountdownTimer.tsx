@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const LAUNCH_DATE = new Date('2026-04-16T00:00:00').getTime();
+const LAUNCH_DATE = new Date('2026-04-19T00:00:00').getTime();
 
 export default function CountdownTimer() {
   const [mounted, setMounted] = useState(false);
@@ -103,9 +103,9 @@ export default function CountdownTimer() {
         <div className="bg-white/80 backdrop-blur-sm border border-slate-100 rounded-xl md:rounded-2xl w-16 sm:w-20 md:w-24 h-20 md:h-24 lg:h-28 flex items-center justify-center shadow-lg mb-2 relative overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-green-50/50 z-0" />
           <div className="relative z-10 flex gap-0.5 md:gap-1 items-center justify-center h-full w-full">
-             {padVal.split('').map((char, index) => (
-               <DigitColumn key={`${index}-${char}`} digit={char} />
-             ))}
+            {padVal.split('').map((char, index) => (
+              <DigitColumn key={`${index}-${char}`} digit={char} />
+            ))}
           </div>
         </div>
         <span className="text-[9px] md:text-xs font-bold text-slate-400 uppercase tracking-widest">{label}</span>

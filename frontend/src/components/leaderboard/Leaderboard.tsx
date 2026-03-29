@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { Trophy, Medal, Award } from 'lucide-react';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/waitlist/leaderboard';
+const API_URL = process.env.NEXT_PUBLIC_API_URL ? `${process.env.NEXT_PUBLIC_API_URL}/waitlist/leaderboard` : 'http://localhost:5000/api/waitlist/leaderboard';
 
 export default function Leaderboard() {
     const [board, setBoard] = useState<any[]>([]);
