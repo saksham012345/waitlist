@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { AlertTriangle } from 'lucide-react';
 
-const LAUNCH_DATE = new Date('2026-04-19T00:00:00').getTime();
+const LAUNCH_DATE = new Date('2026-05-01T00:00:00').getTime();
 
 export default function CountdownTimer() {
   const [mounted, setMounted] = useState(false);
@@ -126,8 +127,18 @@ export default function CountdownTimer() {
             exit={{ opacity: 0, scale: 0.9 }}
             className="text-center"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-50 text-green-600 text-[10px] md:text-xs font-black mb-4 md:mb-6 border border-green-100 uppercase tracking-widest">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-50 text-green-600 text-[10px] md:text-xs font-black mb-6 border border-green-100 uppercase tracking-widest">
               🚀 TrekTribe Launching Soon
+            </div>
+
+            {/* Postponement Notice */}
+            <div className="max-w-xl mx-auto mb-10 bg-amber-50/80 backdrop-blur-sm border border-amber-200 rounded-2xl p-4 flex items-start sm:items-center gap-4 text-amber-800 shadow-sm">
+              <div className="bg-amber-100 p-2 rounded-xl">
+                <AlertTriangle className="w-5 h-5 flex-shrink-0 text-amber-600" />
+              </div>
+              <p className="text-sm md:text-base font-bold text-left leading-relaxed">
+                Due to technical difficulties, the launch of TrekTribe has been postponed to <span className="text-amber-900 underline decoration-amber-300 decoration-2 underline-offset-4">May 1st, 2026</span>. We appreciate your patience!
+              </p>
             </div>
             <div className="flex gap-3 sm:gap-4 md:gap-8 justify-center flex-wrap md:flex-nowrap">
               <TimeUnit value={timeLeft.days} label="Days" />
